@@ -1,19 +1,24 @@
-package com.example.yujuancarlos_dev.emarctest;
+package com.example.yujuancarlos_dev.emarctest.views.main;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import com.example.yujuancarlos_dev.emarctest.views.ImageAdapter;
+import com.example.yujuancarlos_dev.emarctest.R;
+import com.example.yujuancarlos_dev.emarctest.dagger.AppComponent;
+import com.example.yujuancarlos_dev.emarctest.views.ViewComponent;
+import com.example.yujuancarlos_dev.emarctest.dagger.BaseInjectedActivity;
 import com.example.yujuancarlos_dev.emarctest.databinding.ActivityMainBinding;
-import dagger.android.AndroidInjection;
+import com.example.yujuancarlos_dev.emarctest.views.carousel.FullImageActivity;
 import io.reactivex.disposables.CompositeDisposable;
 import java.util.List;
 import javax.inject.Inject;
 
-public class MainActivity extends AppCompatActivity implements ImageAdapter.Callback{
+public class MainActivity extends BaseInjectedActivity<ViewComponent> implements
+    ImageAdapter.Callback {
 
   @Inject MainViewModel mainViewModel;
 
@@ -28,11 +33,20 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.Call
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    AndroidInjection.inject(this);
+
     binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.activity_main, null, false);
     setContentView(binding.getRoot());
     initializeUi();
     observe();
+  }
+
+  @Override
+  protected void initializeDagger(AppComponent parentComponent, ViewComponent containingComponent) {
+    containingComponent.inject(this);
+  }
+
+  @Override protected ViewComponent getSubComponent(AppComponent parentComponent) {
+    return parentComponent.getViewComponent();
   }
 
   private void initializeUi() {

@@ -16,7 +16,7 @@
         android:id="@+id/image_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.yujuancarlos_dev.emarctest.MainActivity"
+        tools:context="com.example.yujuancarlos_dev.emarctest.views.main.MainActivity"
         />
 
   </FrameLayout>

@@ -1,5 +1,8 @@
 package com.example.yujuancarlos_dev.emarctest.network;
 
+import android.content.Context;
+import com.example.yujuancarlos_dev.emarctest.network.ImageApi;
+import com.example.yujuancarlos_dev.emarctest.network.NetworkRepository;
 import dagger.Module;
 import dagger.Provides;
 import javax.inject.Singleton;
@@ -12,12 +15,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by yujuancarlos_dev on 10/03/2018.
  */
 
-@Module
+@Singleton @Module
 public class NetworkModule {
 
   @Provides
   @Singleton
-  Retrofit providesRetrofit() {
+  protected Retrofit providesRetrofit() {
     OkHttpClient client = new OkHttpClient.Builder().build();
     return new Retrofit.Builder()
         .client(client)
@@ -29,13 +32,13 @@ public class NetworkModule {
 
   @Provides
   @Singleton
-  ImageApi providesImageApi(Retrofit retrofit) {
+  protected ImageApi providesImageApi(Retrofit retrofit) {
     return retrofit.create(ImageApi.class);
   }
 
   @Provides
   @Singleton
-  NetworkRepository providesRepository(ImageApi imageApi) {
+  protected NetworkRepository providesRepository(ImageApi imageApi, Context context) {
     return new NetworkRepository(imageApi);
   }
 }

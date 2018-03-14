@@ -1,18 +1,33 @@
 package com.example.yujuancarlos_dev.emarctest.dagger;
 
-import com.example.yujuancarlos_dev.emarctest.MainActivity;
-import com.example.yujuancarlos_dev.emarctest.MainViewModel;
-import com.example.yujuancarlos_dev.emarctest.network.NetworkRepository;
+import android.content.Context;
+import android.content.res.Resources;
 import dagger.Module;
 import dagger.Provides;
-import dagger.android.ContributesAndroidInjector;
+import javax.inject.Singleton;
 
 /**
  * Created by yujuancarlos_dev on 10/03/2018.
  */
 
 @Module
-public abstract class AppModule {
-  @ContributesAndroidInjector
-  abstract MainActivity contributesActivityInjector();
+@Singleton
+public class AppModule {
+  private Context context;
+
+  public AppModule(Context context) {
+    this.context = context;
+  }
+
+  @Singleton
+  @Provides
+  public Context providesContext() {
+    return context;
+  }
+
+  @Singleton
+  @Provides
+  public Resources providesResources() {
+    return context.getResources();
+  }
 }

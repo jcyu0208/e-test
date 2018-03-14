@@ -15,7 +15,7 @@
       android:theme="@style/AppTheme"
       android:name=".ImageApplication">
 
-    <activity android:name=".MainActivity">
+    <activity android:name=".views.main.MainActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 
@@ -23,8 +23,8 @@
       </intent-filter>
     </activity>
 
-    <activity android:name=".FullImageActivity"
-        android:parentActivityName=".MainActivity" >
+    <activity android:name=".views.carousel.FullImageActivity"
+        android:parentActivityName=".views.main.MainActivity" >
 
     </activity>
 

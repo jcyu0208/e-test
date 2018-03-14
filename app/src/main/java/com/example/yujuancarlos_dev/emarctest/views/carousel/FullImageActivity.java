@@ -1,4 +1,4 @@
-package com.example.yujuancarlos_dev.emarctest;
+package com.example.yujuancarlos_dev.emarctest.views.carousel;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import com.example.yujuancarlos_dev.emarctest.views.ImageAdapter;
+import com.example.yujuancarlos_dev.emarctest.R;
 import com.example.yujuancarlos_dev.emarctest.databinding.ActivityMainBinding;
 import java.util.ArrayList;
 import java.util.List;

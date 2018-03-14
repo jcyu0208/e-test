@@ -1,10 +1,9 @@
 package com.example.yujuancarlos_dev.emarctest.dagger;
 
-import com.example.yujuancarlos_dev.emarctest.ImageApplication;
-import com.example.yujuancarlos_dev.emarctest.ViewModelModule;
 import com.example.yujuancarlos_dev.emarctest.network.NetworkModule;
+import com.example.yujuancarlos_dev.emarctest.rx.RxModule;
+import com.example.yujuancarlos_dev.emarctest.views.ViewComponent;
 import dagger.Component;
-import dagger.android.AndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
 import javax.inject.Singleton;
 
@@ -15,10 +14,10 @@ import javax.inject.Singleton;
 @Singleton
 @Component(
     modules = {
-        AndroidSupportInjectionModule.class,
         AppModule.class,
         NetworkModule.class,
-        ViewModelModule.class
+        RxModule.class
     })
-public interface AppComponent extends AndroidInjector<ImageApplication> {
+public interface AppComponent {
+    ViewComponent getViewComponent();
 }

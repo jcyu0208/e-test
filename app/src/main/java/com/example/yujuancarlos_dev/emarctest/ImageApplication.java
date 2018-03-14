@@ -1,28 +1,24 @@
 package com.example.yujuancarlos_dev.emarctest;
 
-import android.app.Activity;
-import android.app.Application;
+import com.example.yujuancarlos_dev.emarctest.dagger.AppComponent;
+import com.example.yujuancarlos_dev.emarctest.dagger.AppModule;
 import com.example.yujuancarlos_dev.emarctest.dagger.DaggerAppComponent;
-import dagger.android.AndroidInjector;
-import dagger.android.DispatchingAndroidInjector;
-import dagger.android.HasActivityInjector;
-import javax.inject.Inject;
+import com.example.yujuancarlos_dev.emarctest.dagger.DaggerApp;
 
 /**
  * Created by yujuancarlos_dev on 10/03/2018.
  */
 
-public class ImageApplication extends Application implements HasActivityInjector {
+public class ImageApplication extends DaggerApp<AppComponent> {
 
-  @Inject
-  DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
-
-  @Override public void onCreate() {
-    super.onCreate();
-    DaggerAppComponent.create().inject(this);
+  @Override protected AppComponent buildMainComponent() {
+    return prepareBuilder()
+        .build();
   }
 
-  @Override public AndroidInjector<Activity> activityInjector() {
-    return dispatchingAndroidInjector;
+  // We need this for Unit Tests
+  protected DaggerAppComponent.Builder prepareBuilder() {
+    return DaggerAppComponent.builder()
+        .appModule(new AppModule(this));
   }
 }
